@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ff_navigation_bar/ff_navigation_bar.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 
 void main() => runApp(AppCore());
 
@@ -20,52 +20,80 @@ class NavigationBarState extends State<AppCore> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Color(0xFFFCFCFC),
-
-          appBar: buildAppBar(),
-
-          //bottomNavigationBar: buildNavigationBar(),
-
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: SingleChildScrollView(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text("Funcionalidades",
-                          style: GoogleFonts.coda(
-                              fontSize: 18, color: Colors.black)),
-                      SizedBox(height: 20),
-                      buildFunctions(),
-                      SizedBox(height: 8),
-                      buildCardInfo(),
-                      SizedBox(height: 8),
-                      buildCardInfo(),
-                      SizedBox(height: 8),
-                      buildCardInfo(),
-                    ],
-                  )),
-                )
-              ],
-            ),
-          ),
-        ));
+            backgroundColor: Color(0xFFFCFCFC),
+            appBar: buildAppBar(),
+            bottomNavigationBar: buildFfNavigationBar(),
+            body: buildSingleChildScrollView()));
   }
 
-  //Metodos para criação dos componentes
-  FFNavigationBar buildNavigationBar() {
+  SingleChildScrollView buildSingleChildScrollView() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: SingleChildScrollView(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text("Informações",
+                    style: GoogleFonts.coda(fontSize: 18, color: Colors.black)),
+                SizedBox(height: 8),
+                buildCardInfo(),
+                SizedBox(height: 8),
+                buildCardInfo(),
+                SizedBox(height: 8),
+                buildCardInfo(),
+                SizedBox(height: 24),
+              ],
+            )),
+          )
+        ],
+      ),
+    );
+  }
+
+  buildCardInfo() {
+    return Container(
+      height: 200,
+      width: double.infinity,
+      child: Stack(
+        alignment: Alignment.bottomLeft,
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(
+              right: 20,
+              top: 20,
+            ),
+            height: 195,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFFc5a6c0),
+                  Color(0xFFa47b9e),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(20),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  FFNavigationBar buildFfNavigationBar() {
     return FFNavigationBar(
       theme: FFNavigationBarTheme(
-        barBackgroundColor: Colors.white,
-        selectedItemBorderColor: Colors.white,
-        selectedItemBackgroundColor: Color(0xFFb27300),
-        selectedItemIconColor: Colors.white,
-        selectedItemLabelColor: Colors.black,
+        barBackgroundColor: Color(0xFF42294a),
+        selectedItemBorderColor: Color(0xFF42294a),
+        selectedItemBackgroundColor: Colors.white,
+        selectedItemIconColor: Color(0xFF42294a),
+        selectedItemLabelColor: Colors.white,
+        unselectedItemIconColor: Colors.white,
+        unselectedItemLabelColor: Colors.white,
       ),
       selectedIndex: selectedIndex,
       onSelectTab: (index) {
@@ -92,85 +120,15 @@ class NavigationBarState extends State<AppCore> {
 
   AppBar buildAppBar() {
     return AppBar(
-      title: Text('Helptonic', style: GoogleFonts.coda(fontSize: 20, color: Color(0xFFf9be51))),
-      centerTitle: true,
-      leading: IconButton(
-          icon: SvgPicture.asset('assets/home.svg', height: 35), onPressed: null),
-      actions: <Widget>[
-        IconButton(icon: SvgPicture.asset('assets/people.svg'), onPressed: null)
-      ],
-      backgroundColor: Colors.transparent,
-      elevation: 0.0,
-    );
-  }
-
-  buildCardInfo() {
-    return Container(
-      height: 200,
-      width:double.infinity,
-      child: Stack(
-        alignment: Alignment.bottomLeft,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(
-              right: 20,
-              top: 20,
-              ),
-              height: 195,
-              width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color(0xFFc79840),
-                  Color(0xFFF9BE51),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(20),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-Row buildFunctions() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: <Widget>[
-      FunctionCard(
-        imageSrc: "assets/gallery2.svg",
-        title: "Galeria"),
-      FunctionCard(
-        imageSrc: "assets/camera2.svg",
-        title: "Câmera"),
-      FunctionCard(
-        imageSrc: "assets/survey2.svg",
-        title: "Pesquisa"),
+    title: SvgPicture.asset('assets/logo.svg', height:30),
+    centerTitle: true,
+    leading: IconButton(
+        icon: SvgPicture.asset('assets/home.svg', height: 23), onPressed: null),
+    actions: <Widget>[
+      IconButton(icon: SvgPicture.asset('assets/people.svg',height: 23), onPressed: null)
     ],
-  );
-}
-
-class FunctionCard extends StatelessWidget {
-  final String imageSrc;
-  final String title;
-  const FunctionCard({
-    Key key,
-    this.imageSrc,
-    this.title,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        SvgPicture.asset(imageSrc, width: 80),
-        SizedBox(height: 10),
-        Text(
-          title,
-          style: GoogleFonts.coda(fontSize: 15, color: Colors.black),
-        )
-      ],
+    backgroundColor: Colors.transparent,
+    elevation: 0.0,
     );
   }
 }
