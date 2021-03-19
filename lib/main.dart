@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() => runApp(AppCore());
 
@@ -12,7 +15,10 @@ class AppCore extends StatefulWidget {
 
 class NavigationBarState extends State<AppCore> {
   //Variaveis utilizadas
-  int selectedIndex = 1;
+  int selectedIndex;
+  int mainIndex = 1;
+  File imagem;
+  final picker = ImagePicker();
 
   //Build do aplicativo
   @override
@@ -100,12 +106,15 @@ class NavigationBarState extends State<AppCore> {
         setState(() {
           selectedIndex = index;
         });
+
+        if (selectedIndex == 0){
+          getImage();
+        }
+        else if (selectedIndex == 2){
+          getFromGallery();
+        }
       },
       items: [
-        FFNavigationBarItem(
-          iconData: Icons.photo_library,
-          label: 'Galeria',
-        ),
         FFNavigationBarItem(
           iconData: Icons.camera_alt,
           label: 'Câmera',
@@ -114,21 +123,55 @@ class NavigationBarState extends State<AppCore> {
           iconData: Icons.people_alt,
           label: 'Teste',
         ),
+        FFNavigationBarItem(
+          iconData: Icons.photo_library,
+          label: 'Galeria',
+        ),
       ],
     );
   }
 
   AppBar buildAppBar() {
     return AppBar(
-    title: SvgPicture.asset('assets/logo.svg', height:30),
-    centerTitle: true,
-    leading: IconButton(
-        icon: SvgPicture.asset('assets/home.svg', height: 23), onPressed: null),
-    actions: <Widget>[
-      IconButton(icon: SvgPicture.asset('assets/people.svg',height: 23), onPressed: null)
-    ],
-    backgroundColor: Colors.transparent,
-    elevation: 0.0,
+      title: SvgPicture.asset('assets/logo.svg', height: 30),
+      centerTitle: true,
+      leading: IconButton(
+          icon: SvgPicture.asset('assets/home.svg', height: 23),
+          onPressed: null),
+      actions: <Widget>[
+        IconButton(
+            icon: SvgPicture.asset('assets/people.svg', height: 23),
+            onPressed: null)
+      ],
+      backgroundColor: Colors.transparent,
+      elevation: 0.0,
     );
   }
+
+  Future getImage() async {
+    final photo = await picker.getImage(source: ImageSource.camera);
+
+    setState(() {
+      if (photo != null) {
+        imagem = File(photo.path);
+        print(imagem);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  getFromGallery() async {
+    PickedFile pickedFile = await ImagePicker().getImage(
+        source: ImageSource.gallery,
+        maxWidth: 1800,
+        maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+        imagem = File(pickedFile.path);
+    }
+    else {
+        print('No image selected.');
+      }
+}
 }
