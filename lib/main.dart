@@ -26,6 +26,7 @@ class NavigationBarState extends State<AppCore> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+            drawer: SideDrawer(),
             backgroundColor: Color(0xFFFCFCFC),
             appBar: buildAppBar(),
             bottomNavigationBar: buildFfNavigationBar(),
@@ -107,10 +108,9 @@ class NavigationBarState extends State<AppCore> {
           selectedIndex = index;
         });
 
-        if (selectedIndex == 0){
+        if (selectedIndex == 0) {
           getImage();
-        }
-        else if (selectedIndex == 2){
+        } else if (selectedIndex == 2) {
           getFromGallery();
         }
       },
@@ -136,13 +136,13 @@ class NavigationBarState extends State<AppCore> {
       title: SvgPicture.asset('assets/logo.svg', height: 30),
       centerTitle: true,
       leading: IconButton(
-          icon: SvgPicture.asset('assets/home.svg', height: 23),
+          icon: SvgPicture.asset('assets/people.svg', height: 23),
           onPressed: null),
-      actions: <Widget>[
-        IconButton(
-            icon: SvgPicture.asset('assets/people.svg', height: 23),
-            onPressed: null)
-      ],
+     //actions: <Widget>[
+        //IconButton(
+            //icon: SvgPicture.asset('assets/people.svg', height: 23),
+            //onPressed: null)
+      //],
       backgroundColor: Colors.transparent,
       elevation: 0.0,
     );
@@ -163,15 +163,54 @@ class NavigationBarState extends State<AppCore> {
 
   getFromGallery() async {
     PickedFile pickedFile = await ImagePicker().getImage(
-        source: ImageSource.gallery,
-        maxWidth: 1800,
-        maxHeight: 1800,
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
     );
     if (pickedFile != null) {
-        imagem = File(pickedFile.path);
+      imagem = File(pickedFile.path);
+    } else {
+      print('No image selected.');
     }
-    else {
-        print('No image selected.');
-      }
+  }
 }
+
+class SideDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: <Widget>[
+          DrawerHeader(
+            child: Center(
+              child: Text(
+                'Perfil do usuário',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
+            ),
+            decoration: BoxDecoration(
+              color: Color(0xFF42294a),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          ListTile(
+            leading: Icon(Icons.shopping_cart),
+            title: Text('Cart'),
+          ),
+          ListTile(
+            leading: Icon(Icons.border_color),
+            title: Text('Feedback'),
+          ),
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Logout'),
+          ),
+        ],
+      ),
+    );
+  }
 }
