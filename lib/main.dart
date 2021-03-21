@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_ftt/sidebar.dart';
+import 'package:flutter_ftt/singlechild.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_ftt/appbar.dart';
 
 void main() => runApp(AppCore());
 
@@ -31,64 +32,6 @@ class NavigationBarState extends State<AppCore> {
             appBar: buildAppBar(),
             bottomNavigationBar: buildFfNavigationBar(),
             body: buildSingleChildScrollView()));
-  }
-
-  SingleChildScrollView buildSingleChildScrollView() {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text("Informações",
-                    style: GoogleFonts.coda(fontSize: 18, color: Colors.black)),
-                SizedBox(height: 8),
-                buildCardInfo(),
-                SizedBox(height: 8),
-                buildCardInfo(),
-                SizedBox(height: 8),
-                buildCardInfo(),
-                SizedBox(height: 24),
-              ],
-            )),
-          )
-        ],
-      ),
-    );
-  }
-
-  buildCardInfo() {
-    return Container(
-      height: 200,
-      width: double.infinity,
-      child: Stack(
-        alignment: Alignment.bottomLeft,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(
-              right: 20,
-              top: 20,
-            ),
-            height: 195,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color(0xFFc5a6c0),
-                  Color(0xFFa47b9e),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(20),
-            ),
-          )
-        ],
-      ),
-    );
   }
 
   FFNavigationBar buildFfNavigationBar() {
@@ -131,23 +74,6 @@ class NavigationBarState extends State<AppCore> {
     );
   }
 
-  AppBar buildAppBar() {
-    return AppBar(
-      title: SvgPicture.asset('assets/logo.svg', height: 30),
-      centerTitle: true,
-      leading: IconButton(
-          icon: SvgPicture.asset('assets/people.svg', height: 23),
-          onPressed: null),
-     //actions: <Widget>[
-        //IconButton(
-            //icon: SvgPicture.asset('assets/people.svg', height: 23),
-            //onPressed: null)
-      //],
-      backgroundColor: Colors.transparent,
-      elevation: 0.0,
-    );
-  }
-
   Future getImage() async {
     final photo = await picker.getImage(source: ImageSource.camera);
 
@@ -175,42 +101,3 @@ class NavigationBarState extends State<AppCore> {
   }
 }
 
-class SideDrawer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: Column(
-        children: <Widget>[
-          DrawerHeader(
-            child: Center(
-              child: Text(
-                'Perfil do usuário',
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 25),
-              ),
-            ),
-            decoration: BoxDecoration(
-              color: Color(0xFF42294a),
-            ),
-          ),
-          ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
-          ),
-          ListTile(
-            leading: Icon(Icons.shopping_cart),
-            title: Text('Cart'),
-          ),
-          ListTile(
-            leading: Icon(Icons.border_color),
-            title: Text('Feedback'),
-          ),
-          ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
-          ),
-        ],
-      ),
-    );
-  }
-}
