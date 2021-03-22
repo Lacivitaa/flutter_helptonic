@@ -6,7 +6,7 @@ AppBar buildAppBar() {
     title: SvgPicture.asset('assets/logo.svg', height: 30),
     centerTitle: true,
     leading: IconButton(
-        icon: SvgPicture.asset('assets/people.svg', height: 23),
+        icon: SvgPicture.asset('assets/slide.svg', height: 25),
         onPressed: null),
     //actions: <Widget>[
     //IconButton(

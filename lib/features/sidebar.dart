@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SideDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String nome;
+    int idade;
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -12,7 +15,7 @@ class SideDrawer extends StatelessWidget {
               child: Text(
                 'Perfil do usuário',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 25),
+                style: GoogleFonts.coda(color: Colors.white, fontSize: 25),
               ),
             ),
             decoration: BoxDecoration(
@@ -20,20 +23,27 @@ class SideDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
+            leading: Icon(
+              Icons.create,
+              color: Color(0xFF42294a),
+            ),
+            title: Text('Editar dados',
+                style:
+                    GoogleFonts.coda(color: Color(0xFF42294a), fontSize: 15)),
           ),
           ListTile(
-            leading: Icon(Icons.shopping_cart),
-            title: Text('Cart'),
+            leading: Icon(
+              Icons.person,
+              color: Color(0xFF42294a),
+            ),
+            title: Text('Nome: '),
           ),
           ListTile(
-            leading: Icon(Icons.border_color),
-            title: Text('Feedback'),
-          ),
-          ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
+            leading: Icon(
+              Icons.calendar_today,
+              color: Color(0xFF42294a),
+            ),
+            title: Text('Idade: '),
           ),
         ],
       ),

@@ -1,11 +1,13 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_ftt/sidebar.dart';
-import 'package:flutter_ftt/singlechild.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter_ftt/appbar.dart';
+
+import 'features/appbar.dart';
+import 'features/sidebar.dart';
+import 'features/singlechild.dart';
 
 void main() => runApp(AppCore());
 
