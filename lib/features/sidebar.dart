@@ -5,43 +5,39 @@ import 'package:google_fonts/google_fonts.dart';
 class SideDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String nome;
+    String email;
     int idade;
     return Drawer(
       child: Column(
         children: <Widget>[
           DrawerHeader(
             child: Center(
-              child: Text(
-                'Perfil do usuário',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.coda(color: Colors.white, fontSize: 25),
-              ),
+              child: Image.asset("assets/logoperfil.png"),
             ),
             decoration: BoxDecoration(
-              color: Color(0xFF42294a),
+              color: Color(0xFFab0000),
             ),
           ),
           ListTile(
             leading: Icon(
               Icons.create,
-              color: Color(0xFF42294a),
+              color: Colors.black,
             ),
             title: Text('Editar dados',
                 style:
-                    GoogleFonts.coda(color: Color(0xFF42294a), fontSize: 15)),
+                    GoogleFonts.coda(color: Colors.black, fontSize: 15)),
           ),
           ListTile(
             leading: Icon(
               Icons.person,
-              color: Color(0xFF42294a),
+              color: Colors.black,
             ),
-            title: Text('Nome: '),
+            title: Text('Email: '),
           ),
           ListTile(
             leading: Icon(
               Icons.calendar_today,
-              color: Color(0xFF42294a),
+              color: Colors.black,
             ),
             title: Text('Idade: '),
           ),

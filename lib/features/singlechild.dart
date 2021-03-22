@@ -48,8 +48,8 @@ SingleChildScrollView buildSingleChildScrollView() {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color(0xFFc5a6c0),
-                  Color(0xFFa47b9e),
+                  Color(0xFFb02f2f),
+                  Color(0xFFab0000),
                 ],
               ),
               borderRadius: BorderRadius.circular(20),
