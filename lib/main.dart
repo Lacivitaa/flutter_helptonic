@@ -82,7 +82,7 @@ class NavigationBarState extends State<AppCore> {
     setState(() {
       if (photo != null) {
         imagem = File(photo.path);
-        print(imagem);
+        print(imagem.readAsBytes());
       } else {
         print('No image selected.');
       }
@@ -97,6 +97,7 @@ class NavigationBarState extends State<AppCore> {
     );
     if (pickedFile != null) {
       imagem = File(pickedFile.path);
+      print(imagem.readAsBytes());
     } else {
       print('No image selected.');
     }
