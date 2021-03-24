@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+import 'package:http/http.dart' as http;
 
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,10 +19,14 @@ class AppCore extends StatefulWidget {
 }
 
 class NavigationBarState extends State<AppCore> {
+  
   //Variaveis utilizadas
   int selectedIndex;
   int mainIndex = 1;
-  File imagem;
+  var bytesimage;
+  var imgdb;
+  String base64in;
+  var base64out;
   final picker = ImagePicker();
 
   //Build do aplicativo
@@ -81,8 +87,8 @@ class NavigationBarState extends State<AppCore> {
 
     setState(() {
       if (photo != null) {
-        imagem = File(photo.path);
-        print(imagem.readAsBytes());
+        bytesimage = photo.readAsBytes();
+        base64in = base64Encode(bytesimage);
       } else {
         print('No image selected.');
       }
@@ -96,11 +102,15 @@ class NavigationBarState extends State<AppCore> {
       maxHeight: 1800,
     );
     if (pickedFile != null) {
-      imagem = File(pickedFile.path);
-      print(imagem.readAsBytes());
+      bytesimage = pickedFile.readAsBytes();
+      base64in = base64Encode(bytesimage);
     } else {
       print('No image selected.');
     }
   }
-}
 
+  decodeImage() async {
+    base64out = base64Decode(imgdb);
+    return base64out;
+  }
+}
