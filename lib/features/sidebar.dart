@@ -27,31 +27,31 @@ class SideDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(
-              Icons.person,
+              Icons.account_circle,
+              color: Colors.black,
+            ),
+            title: Text('ID do Usuário: '),
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.email,
               color: Colors.black,
             ),
             title: Text('Email: '),
           ),
           ListTile(
             leading: Icon(
-              Icons.calendar_today,
-              color: Colors.black,
-            ),
-            title: Text('Email: '),
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.calendar_today,
+              Icons.accessibility,
               color: Colors.black,
             ),
             title: Text('Nome: '),
           ),
           ListTile(
             leading: Icon(
-              Icons.calendar_today,
+              Icons.adjust,
               color: Colors.black,
             ),
-            title: Text('Tipo de Daltonismo: '),
+            title: Text('Tipo: '),
           ),
         ],
       ),
