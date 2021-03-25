@@ -5,8 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 class SideDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String email;
-    int idade;
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -39,7 +37,21 @@ class SideDrawer extends StatelessWidget {
               Icons.calendar_today,
               color: Colors.black,
             ),
-            title: Text('Idade: '),
+            title: Text('Email: '),
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.calendar_today,
+              color: Colors.black,
+            ),
+            title: Text('Nome: '),
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.calendar_today,
+              color: Colors.black,
+            ),
+            title: Text('Tipo de Daltonismo: '),
           ),
         ],
       ),
