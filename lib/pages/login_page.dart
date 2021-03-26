@@ -37,6 +37,16 @@ class LoginScreen extends StatelessWidget {
             onPressed: () {
               final String email = _controllerEmail.text;
               final String password = _controllerPassword.text;
+
+              if (email != null && password!=null){
+
+              }
+              else if(email == null){
+                _controllerEmail.clear();
+              }
+              else if(password == null){
+                _controllerPassword.clear();
+              }
             },
           )
         ],
