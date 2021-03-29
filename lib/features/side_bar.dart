@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ftt/pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SideDrawer extends StatelessWidget {
@@ -10,7 +11,7 @@ class SideDrawer extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             child: Center(
-              child: Image.asset("assets/logoperfil.png"),
+              child: Image.asset("assets/logoperfil.png",scale: 5),
             ),
             decoration: BoxDecoration(
               color: Color(0xFFab0000),
@@ -21,16 +22,14 @@ class SideDrawer extends StatelessWidget {
               Icons.create,
               color: Colors.black,
             ),
-            title: Text('Editar dados',
+            title: Text('Login',
                 style:
                     GoogleFonts.coda(color: Colors.black, fontSize: 15)),
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.account_circle,
-              color: Colors.black,
-            ),
-            title: Text('ID do Usuário: '),
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                        return LoginScreen();
+                      }));
+                    },
           ),
           ListTile(
             leading: Icon(

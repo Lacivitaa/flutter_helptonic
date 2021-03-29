@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ftt/features/app_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController _controllerEmail = TextEditingController();
