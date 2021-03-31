@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ftt/model/client.dart';
+import 'package:flutter_ftt/model/user.dart';
 import 'package:flutter_ftt/view/widget/app_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -35,7 +35,7 @@ class RegisterScreen extends StatelessWidget {
     final String nome = _controllerNome.text;
     
     if (email != null && password != null) {
-      final registerUser = User(email: email, senha: password, nome: nome);
+      final registerUser = User(email: email, password: password, name: nome);
       Navigator.pop(context, registerUser);
     } else if (email == null) {
       _controllerEmail.clear();

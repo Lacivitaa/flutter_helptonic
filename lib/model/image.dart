@@ -1,24 +1,24 @@
 class Image{
-  int idUser;
-  String bynaryPhoto;
+  int id;
+  String base64Photo;
   DateTime data;
 
   Image({
-    this.idUser,
-    this.bynaryPhoto,
+    this.id,
+    this.base64Photo,
     this.data,
   });
 
   Image.fromJson(Map<String, dynamic> json){
-    idUser = json['idUser'];
-    bynaryPhoto = json['bynaryPhoto'];
+    id = json['_id'];
+    base64Photo = json['base64Photo'];
     data = json['data'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['idUser'] = this.idUser;
-    data['bynaryPhoto'] = this.bynaryPhoto;
+    data['_id'] = this.id;
+    data['base64Photo'] = this.base64Photo;
     data['data'] = this.data;
     return data;
   }

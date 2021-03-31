@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ftt/model/user.dart';
 import 'package:flutter_ftt/model/login.dart';
+import 'package:flutter_ftt/repository/user_repository.dart';
 import 'package:flutter_ftt/view/widget/app_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,14 +24,6 @@ class LoginScreen extends StatelessWidget {
               createLogin(_controllerEmail, _controllerPassword, context);
             },
           ),
-          //ElevatedButton(
-            //child: Text("Registrar"),
-            //onPressed: () {
-              //Navigator.push(context, MaterialPageRoute(builder: (context){
-                //return RegisterScreen();
-              //} ));
-            //},
-          //)
         ],
       ),
     );
@@ -41,7 +35,10 @@ class LoginScreen extends StatelessWidget {
     
     if (email != null && password != null) {
       final loginUser = Login(email: email, senha: password);
+      UserRepository userRepository = new UserRepository();
+      var user = userRepository.fetchData(loginUser);
       Navigator.pop(context, loginUser);
+
     } else if (email == null) {
       _controllerEmail.clear();
       _controllerPassword.clear();

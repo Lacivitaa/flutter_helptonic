@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ftt/model/client.dart';
+import 'package:flutter_ftt/model/user.dart';
 import 'package:flutter_ftt/model/login.dart';
 import 'package:flutter_ftt/view/page/login_page.dart';
 import 'package:flutter_ftt/view/page/register_page.dart';
