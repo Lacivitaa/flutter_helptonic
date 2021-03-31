@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ftt/model/user.dart';
 import 'package:flutter_ftt/model/login.dart';
-import 'package:flutter_ftt/repository/user_repository.dart';
+import 'package:flutter_ftt/repository/login_repository.dart';
 import 'package:flutter_ftt/view/widget/app_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
