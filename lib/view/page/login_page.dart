@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ftt/model/login.dart';
 import 'package:flutter_ftt/view/widget/app_bar.dart';
-import 'package:flutter_ftt/view/page/register_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -19,29 +19,32 @@ class LoginScreen extends StatelessWidget {
           ElevatedButton(
             child: Text("Entrar"),
             onPressed: () {
-              createLogin(_controllerEmail, _controllerPassword);
+              createLogin(_controllerEmail, _controllerPassword, context);
             },
           ),
-          ElevatedButton(
-            child: Text("Registrar"),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context){
-                return RegisterScreen();
-              } ));
-            },
-          )
+          //ElevatedButton(
+            //child: Text("Registrar"),
+            //onPressed: () {
+              //Navigator.push(context, MaterialPageRoute(builder: (context){
+                //return RegisterScreen();
+              //} ));
+            //},
+          //)
         ],
       ),
     );
   }
 
-  void createLogin(TextEditingController _controllerEmail, TextEditingController _controllerPassword) {
+  void createLogin(TextEditingController _controllerEmail, TextEditingController _controllerPassword, BuildContext context) {
     final String email = _controllerEmail.text;
     final String password = _controllerPassword.text;
     
     if (email != null && password != null) {
+      final loginUser = Login(email: email, senha: password);
+      Navigator.pop(context, loginUser);
     } else if (email == null) {
       _controllerEmail.clear();
+      _controllerPassword.clear();
     } else if (password == null) {
       _controllerPassword.clear();
     }

@@ -6,11 +6,9 @@ class User {
   String tipoDaltonismo;
 
   User({
-    this.id,
     this.nome,
     this.email,
     this.senha,
-    this.tipoDaltonismo,
   });
 
   User.fromJson(Map<String, dynamic> json) {
@@ -29,5 +27,10 @@ class User {
     data['senha'] = this.senha;
     data['tipoDaltonismo'] = this.tipoDaltonismo;
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'User:' + email + '/' + senha + '/' + nome;
   }
 }
