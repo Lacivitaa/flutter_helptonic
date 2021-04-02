@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ftt/view/service/alertDialog.dart';
 import 'package:flutter_ftt/view/widget/side_bar.dart';
 import 'package:flutter_ftt/view/widget/single_child.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,11 +10,9 @@ import '../../main.dart';
 import '../widget/main_app_bar.dart';
 
 class NavigationBarState extends State<AppCore> {
-  
   //Variaveis utilizadas
   int selectedIndex;
   int mainIndex = 1;
-  var bytesimage;
   var imgdb;
   String base64in;
   var base64out;
@@ -25,7 +22,6 @@ class NavigationBarState extends State<AppCore> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
         home: Scaffold(
             drawer: SideDrawer(),
             backgroundColor: Color(0xFFFCFCFC),
@@ -73,36 +69,33 @@ class NavigationBarState extends State<AppCore> {
       ],
     );
   }
-  
-  Future getImage() async {
-    final photo = await picker.getImage(source: ImageSource.camera);
 
-    setState(() {
-      if (photo != null) {
-        bytesimage = photo.readAsBytes();
-        base64in = base64Encode(bytesimage);
-      } else {
-        print('No image selected.');
-      }
-    });
+  Future getImage() async {
+    try {
+      final photo = await picker.getImage(source: ImageSource.camera);
+
+      setState(() {
+        if (photo != null) {
+          //imgdb = photo;
+        } else {
+          print('No image selected.');
+        }
+      });
+    } catch (e) {
+      alertDialog(context, 'Não há cameras disponíveis');
+    }
   }
 
   getFromGallery() async {
-    PickedFile pickedFile = await ImagePicker().getImage(
+    PickedFile photo = await ImagePicker().getImage(
       source: ImageSource.gallery,
       maxWidth: 1800,
       maxHeight: 1800,
     );
-    if (pickedFile != null) {
-      bytesimage = pickedFile.readAsBytes();
-      base64in = base64Encode(bytesimage);
+    if (photo != null) {
+      //imgdb = photo;
     } else {
       print('No image selected.');
     }
-  }
-
-  decodeImage() async {
-    base64out = base64Decode(imgdb);
-    return base64out;
   }
 }

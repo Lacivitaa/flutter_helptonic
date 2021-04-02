@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ftt/model/user.dart';
+import 'package:flutter_ftt/model/api_response.dart';
 import 'package:flutter_ftt/model/login.dart';
-import 'package:flutter_ftt/repository/login_repository.dart';
+import 'package:flutter_ftt/model/user.dart';
+import 'package:flutter_ftt/repository/user_repository.dart';
+import 'package:flutter_ftt/view/service/alertDialog.dart';
+import 'package:flutter_ftt/view/service/showDialog.dart';
 import 'package:flutter_ftt/view/widget/app_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,16 +32,20 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void createLogin(TextEditingController _controllerEmail, TextEditingController _controllerPassword, BuildContext context) {
+  void createLogin(TextEditingController _controllerEmail, TextEditingController _controllerPassword, BuildContext context) async {
     final String email = _controllerEmail.text;
     final String password = _controllerPassword.text;
-    
+
     if (email != null && password != null) {
       final loginUser = Login(email: email, senha: password);
       UserRepository userRepository = new UserRepository();
-      var user = userRepository.fetchData(loginUser);
+      var user = await userRepository.loginUser(loginUser);
+      if (user.message != null) {
+        showMyDialog(context, "Login incorreto");
+        _controllerEmail.clear();
+        _controllerPassword.clear();
+      }
       Navigator.pop(context, loginUser);
-
     } else if (email == null) {
       _controllerEmail.clear();
       _controllerPassword.clear();
@@ -49,12 +56,11 @@ class LoginScreen extends StatelessWidget {
 }
 
 class Editor extends StatelessWidget {
-
   final TextEditingController _controller;
   final String _rotulo;
   final IconData _icon;
 
-  Editor(this._controller,this._rotulo, this._icon);
+  Editor(this._controller, this._rotulo, this._icon);
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +69,7 @@ class Editor extends StatelessWidget {
       child: TextField(
         controller: _controller,
         style: GoogleFonts.coda(color: Colors.black, fontSize: 15),
-        decoration:
-            InputDecoration(labelText: _rotulo, icon: Icon(_icon)),
+        decoration: InputDecoration(labelText: _rotulo, icon: Icon(_icon)),
         keyboardType: TextInputType.text,
       ),
     );

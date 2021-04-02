@@ -1,14 +1,19 @@
+import 'package:flutter_ftt/model/photo.dart';
+
 class User {
-  String sId;
+  String id;
   String email;
   String password;
   String name;
   String typeColorBlindess;
   List<Photo> photo;
   int iV;
+  String token;
+  String message;
+  bool error;
 
   User(
-      {this.sId,
+      {this.id,
       this.email,
       this.password,
       this.name,
@@ -17,7 +22,7 @@ class User {
       this.iV});
 
   User.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
+    id = json['_id'];
     email = json['email'];
     password = json['password'];
     name = json['name'];
@@ -29,11 +34,14 @@ class User {
       });
     }
     iV = json['__v'];
+    token = json['token'];
+    message = json['message'];
+    error = json['error'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
+    data['_id'] = this.id;
     data['email'] = this.email;
     data['password'] = this.password;
     data['name'] = this.name;
@@ -42,28 +50,9 @@ class User {
       data['photo'] = this.photo.map((v) => v.toJson()).toList();
     }
     data['__v'] = this.iV;
-    return data;
-  }
-}
-
-class Photo {
-  String sId;
-  String data;
-  String base64Photo;
-
-  Photo({this.sId, this.data, this.base64Photo});
-
-  Photo.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
-    data = json['data'];
-    base64Photo = json['base64Photo'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['data'] = this.data;
-    data['base64Photo'] = this.base64Photo;
+    data['token'] = this.token;
+    data['message'] = this.message;
+    data['error']= this.error;
     return data;
   }
 }

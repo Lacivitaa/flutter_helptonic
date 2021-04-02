@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ftt/model/user.dart';
 import 'package:flutter_ftt/model/login.dart';
+import 'package:flutter_ftt/repository/user_const.dart';
 import 'package:flutter_ftt/view/page/login_page.dart';
 import 'package:flutter_ftt/view/page/register_page.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -46,12 +47,9 @@ class SideDrawer extends StatelessWidget {
                 style:
                     GoogleFonts.coda(color: Colors.black, fontSize: 15)),
                     onTap: (){
-                      final Future <User> future  = Navigator.push(context, MaterialPageRoute(builder: (context){
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
                         return RegisterScreen();
                       }));
-                      future.then((loginofuser) {
-                        debugPrint("User registrado ! = User: " + loginofuser.toString());
-                      });
                     },
           ),
           ListTile(
@@ -59,21 +57,21 @@ class SideDrawer extends StatelessWidget {
               Icons.email,
               color: Colors.black,
             ),
-            title: Text('Email: '),
+            title: Text('Email: ' + UserConst.email),
           ),
           ListTile(
             leading: Icon(
               Icons.accessibility,
               color: Colors.black,
             ),
-            title: Text('Nome: '),
+            title: Text('Nome: ' + UserConst.name),
           ),
           ListTile(
             leading: Icon(
               Icons.adjust,
               color: Colors.black,
             ),
-            title: Text('Tipo: '),
+            title: Text('Tipo: ' + UserConst.typeBlindess),
           ),
         ],
       ),
