@@ -1,6 +1,7 @@
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ftt/repository/photo_repository.dart';
 import 'package:flutter_ftt/view/service/alertDialog.dart';
 import 'package:flutter_ftt/view/widget/side_bar.dart';
 import 'package:flutter_ftt/view/widget/single_child.dart';
@@ -49,7 +50,11 @@ class NavigationBarState extends State<AppCore> {
 
         if (selectedIndex == 0) {
           getImage();
-        } else if (selectedIndex == 2) {
+        } 
+        else if (selectedIndex == 1){
+          PhotoRepository photoRepository = new PhotoRepository();
+          photoRepository.postPhoto('TESTE.png');
+        }else if (selectedIndex == 2) {
           getFromGallery();
         }
       },

@@ -1,35 +1,39 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_ftt/interface/photo_repository_interface.dart';
-import 'package:flutter_ftt/model/api_response.dart';
 import 'package:flutter_ftt/model/photo.dart';
-import 'package:flutter_ftt/model/user.dart';
 import 'package:flutter_ftt/repository/user_const.dart';
 
-class PhotoRepository implements IApiSheetInterfacePhoto{
+import 'api_const.dart';
+
+class PhotoRepository implements IApiSheetInterfacePhoto {
   Dio dio = Dio();
-  bool isLoading;
-  static String uri = "/user";
+  static String uri = "/photo";
 
   @override
-  Future<ApiResponse<User>> postPhoto(Photo userData) async {
+  Future<bool> postPhoto(String urlImage) async {
     try {
-      isLoading = true;
-      Response response;
-      var responseData = User.fromJson(response.data);
-      isLoading = false;
+      Response response = await dio.post(Api.apiUrl + uri,
+          data: {
+            'userId': UserConst.id,
+            'photo': {'imageUrl': Api.s3Url + urlImage}
+          },
+          options: Options(headers: {
+            'x-access-token': UserConst.token,
+            'Content-Type': 'application/json'
+          }));
+      bool responseData = response.data;
 
-      return ApiResponse(
-        message: response.statusMessage,
-        status: response.statusCode,
-        data: responseData);
-    } catch (e){
-      isLoading = false;
-      return ApiResponse(message: e, status: 500);
+      return responseData;
+    } on DioError catch (e) {
+      return false;
     }
-  }
+    }
 
   @override
-  Future<ApiResponse<User>> deletePhoto(Photo userData) {
+  Future<bool> deletePhoto(Photo userData) {
+
+    throw UnimplementedError();
   }
-  
 }
+
+class ApiConst {}
