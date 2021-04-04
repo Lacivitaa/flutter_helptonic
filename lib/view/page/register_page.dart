@@ -52,7 +52,7 @@ class RegisterScreen extends StatelessWidget {
           Register(email: email, senha: password, nome: nome, tipoDalt: tipo);
       RegisterRepository registerRepository = new RegisterRepository();
       var user = await registerRepository.registerUser(registerUser);
-      UserConst.disconnected = true;
+      UserConst.disconnected = false;
       if (user.error != null) {
         showDialog(
             context: context,
