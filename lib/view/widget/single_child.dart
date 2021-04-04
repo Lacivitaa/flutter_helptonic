@@ -1,14 +1,12 @@
 import 'package:carousel_images/carousel_images.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ftt/constant/user_const.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-List<String> imageList = [
-  "https://static2.thetravelimages.com/wordpress/wp-content/uploads/2018/08/seattle-skyline.jpg",
-  "https://viajando.expedia.com.br/sites/viajando.expedia.com.br/files/Golden%20Gate%20Bridge%20San%20Francisco.jpg",
-];
+List<String> imageList = [];
 
-SingleChildScrollView buildSingleChildScrollView() {
+SingleChildScrollView buildSingleChildScrollView(bool update) {
   return SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,13 +21,14 @@ SingleChildScrollView buildSingleChildScrollView() {
               Text("Todas as fotos registradas",
                   style: GoogleFonts.coda(fontSize: 18, color: Colors.black)),
               SizedBox(height: 8),
-              createCarousel()
-              //buildCardInfo(),
-              //SizedBox(height: 8),
-              //buildCardInfo(),
-              //SizedBox(height: 8),
-              //buildCardInfo(),
-              //SizedBox(height: 24),
+              Visibility(
+                child: createCarousel(),
+                visible: UserConst.imageCarousel,
+              ),
+              Visibility(
+                child: Text("Usuário não logado no momento"),
+                visible: UserConst.disconnected,
+              )
             ],
           )),
         )
@@ -39,6 +38,7 @@ SingleChildScrollView buildSingleChildScrollView() {
 }
 
 CarouselImages createCarousel() {
+
   return new CarouselImages(
       scaleFactor: 0.8,
       listImages: imageList,
@@ -46,18 +46,6 @@ CarouselImages createCarousel() {
       borderRadius: 10.0,
       cachedNetworkImage: true,
       verticalAlignment: Alignment.topCenter);
-}
-
-Container showImage() {
-  return Container(
-      height: 200,
-      width: double.infinity,
-      child: Stack(alignment: Alignment.bottomLeft, children: <Widget>[
-        Image.network(
-          "https://images.unsplash.com/photo-1547721064-da6cfb341d50",
-          fit: BoxFit.cover,
-        ),
-      ]));
 }
 
 buildCardInfo() {

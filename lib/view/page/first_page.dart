@@ -2,7 +2,7 @@ import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ftt/repository/photo_repository.dart';
-import 'package:flutter_ftt/view/service/alertDialog.dart';
+import 'package:flutter_ftt/view/service/alert_dialog.dart';
 import 'package:flutter_ftt/view/widget/side_bar.dart';
 import 'package:flutter_ftt/view/widget/single_child.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,18 +18,24 @@ class NavigationBarState extends State<AppCore> {
   String base64in;
   var base64out;
   final picker = ImagePicker();
+  bool update;
 
   //Build do aplicativo
   @override
   Widget build(BuildContext context) {
+
+    setState(() {
+      
+    });
+
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
             drawer: SideDrawer(),
             backgroundColor: Color(0xFFFCFCFC),
             appBar: buildMainAppBar(),
             bottomNavigationBar: buildFfNavigationBar(),
-            body: buildSingleChildScrollView()));
+            body: buildSingleChildScrollView(update)));
   }
 
   FFNavigationBar buildFfNavigationBar() {
@@ -51,11 +57,10 @@ class NavigationBarState extends State<AppCore> {
 
         if (selectedIndex == 0) {
           getImage();
-        } 
-        else if (selectedIndex == 1){
+        } else if (selectedIndex == 1) {
           PhotoRepository photoRepository = new PhotoRepository();
           photoRepository.postPhoto('TESTE.png');
-        }else if (selectedIndex == 2) {
+        } else if (selectedIndex == 2) {
           getFromGallery();
         }
       },
@@ -104,4 +109,15 @@ class NavigationBarState extends State<AppCore> {
       print('No image selected.');
     }
   }
+
+  void rebuildAllChildren(BuildContext context) {
+    void rebuild(Element el) {
+      el.markNeedsBuild();
+      el.visitChildren(rebuild);
+    }
+
+    (context as Element).visitChildren(rebuild);
+  }
+
+  
 }

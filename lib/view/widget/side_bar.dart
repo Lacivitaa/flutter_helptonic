@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ftt/main.dart';
 import 'package:flutter_ftt/model/user.dart';
 import 'package:flutter_ftt/model/login.dart';
 import 'package:flutter_ftt/constant/user_const.dart';
+import 'package:flutter_ftt/view/page/first_page.dart';
 import 'package:flutter_ftt/view/page/login_page.dart';
 import 'package:flutter_ftt/view/page/register_page.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,8 +38,9 @@ class SideDrawer extends StatelessWidget {
                     return LoginScreen();
                   }));
                   future.then((loginofuser) {
-                    debugPrint(
-                        "Login realizado ! = User: " + loginofuser.toString());
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return AppCore();
+                    }));
                   });
                 },
               )),

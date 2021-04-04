@@ -1,9 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_ftt/interface/login_repository_interface.dart';
 import 'package:flutter_ftt/model/login.dart';
 import 'package:flutter_ftt/model/user.dart';
 import 'package:flutter_ftt/constant/api_const.dart';
 import 'package:flutter_ftt/constant/user_const.dart';
+import 'package:flutter_ftt/view/widget/single_child.dart';
+
+BuildContext context;
 
 class LoginRepository implements IApiSheetInterfaceLogin {
   Dio dio = Dio();
@@ -22,6 +26,10 @@ class LoginRepository implements IApiSheetInterfaceLogin {
         UserConst.name = responseData.name;
         UserConst.typeBlindess = responseData.typeColorBlindess;
         UserConst.token = responseData.token;
+        for (int i = 0; i < responseData.photo.length; i++) {
+          imageList.add(responseData.photo[i].imageUrl);
+        }
+        
       }
 
       return responseData;
