@@ -23,6 +23,7 @@ class NavigationBarState extends State<AppCore> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
         home: Scaffold(
             drawer: SideDrawer(),
             backgroundColor: Color(0xFFFCFCFC),

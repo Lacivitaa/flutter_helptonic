@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ftt/model/api_response.dart';
+import 'package:flutter_ftt/constant/user_const.dart';
 import 'package:flutter_ftt/model/login.dart';
-import 'package:flutter_ftt/model/user.dart';
-import 'package:flutter_ftt/repository/user_repository.dart';
-import 'package:flutter_ftt/view/service/alertDialog.dart';
+import 'package:flutter_ftt/repository/login_repository.dart';
 import 'package:flutter_ftt/view/service/showDialog.dart';
 import 'package:flutter_ftt/view/widget/app_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,13 +31,14 @@ class LoginScreen extends StatelessWidget {
   }
 
   void createLogin(TextEditingController _controllerEmail, TextEditingController _controllerPassword, BuildContext context) async {
-    final String email = _controllerEmail.text;
-    final String password = _controllerPassword.text;
+    final String email = _controllerEmail.text.trim();
+    final String password = _controllerPassword.text.trim();
 
     if (email != null && password != null) {
       final loginUser = Login(email: email, senha: password);
-      UserRepository userRepository = new UserRepository();
+      LoginRepository userRepository = new LoginRepository();
       var user = await userRepository.loginUser(loginUser);
+      UserConst.disconnected = false;
       if (user.message != null) {
         showMyDialog(context, "Login incorreto");
         _controllerEmail.clear();
@@ -65,7 +64,7 @@ class Editor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(18.0),
+      padding: const EdgeInsets.all(14.0),
       child: TextField(
         controller: _controller,
         style: GoogleFonts.coda(color: Colors.black, fontSize: 15),

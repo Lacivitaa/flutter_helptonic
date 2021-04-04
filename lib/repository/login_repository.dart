@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter_ftt/interface/login_repository_interface.dart';
 import 'package:flutter_ftt/model/login.dart';
 import 'package:flutter_ftt/model/user.dart';
-import 'package:flutter_ftt/repository/api_const.dart';
-import 'package:flutter_ftt/repository/user_const.dart';
+import 'package:flutter_ftt/constant/api_const.dart';
+import 'package:flutter_ftt/constant/user_const.dart';
 
-class UserRepository implements IApiSheetInterfaceLogin {
+class LoginRepository implements IApiSheetInterfaceLogin {
   Dio dio = Dio();
   static String uri = "/login";
 

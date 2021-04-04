@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_ftt/interface/register_repository_interface.dart';
 import 'package:flutter_ftt/model/register.dart';
 import 'package:flutter_ftt/model/user.dart';
-import 'package:flutter_ftt/repository/api_const.dart';
-import 'package:flutter_ftt/repository/user_const.dart';
+import 'package:flutter_ftt/constant/api_const.dart';
+import 'package:flutter_ftt/constant/user_const.dart';
 
 class RegisterRepository implements IApiSheetInterfaceRegister {
   Dio dio = Dio();

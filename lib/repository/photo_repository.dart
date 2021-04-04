@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_ftt/interface/photo_repository_interface.dart';
 import 'package:flutter_ftt/model/photo.dart';
-import 'package:flutter_ftt/repository/user_const.dart';
+import 'package:flutter_ftt/constant/user_const.dart';
 
-import 'api_const.dart';
+import '../constant/api_const.dart';
 
 class PhotoRepository implements IApiSheetInterfacePhoto {
   Dio dio = Dio();
