@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ftt/aws_s3/image_picker/single_image_picker.dart';
 import 'package:flutter_ftt/repository/photo_repository.dart';
-import 'package:flutter_ftt/view/service/alert_dialog.dart';
 import 'package:flutter_ftt/view/widget/side_bar.dart';
 import 'package:flutter_ftt/view/widget/single_child.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,6 +14,7 @@ import '../widget/main_app_bar.dart';
 
 class NavigationBarState extends State<AppCore> {
   //Variaveis utilizadas
+  Source source = Source.NONE;
   int selectedIndex;
   int mainIndex = 1;
   var imgdb;
@@ -23,10 +26,7 @@ class NavigationBarState extends State<AppCore> {
   //Build do aplicativo
   @override
   Widget build(BuildContext context) {
-
-    setState(() {
-      
-    });
+    setState(() {});
 
     return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -56,13 +56,10 @@ class NavigationBarState extends State<AppCore> {
         });
 
         if (selectedIndex == 0) {
-          getImage();
         } else if (selectedIndex == 1) {
           PhotoRepository photoRepository = new PhotoRepository();
           photoRepository.postPhoto('TESTE.png');
-        } else if (selectedIndex == 2) {
-          getFromGallery();
-        }
+        } else if (selectedIndex == 2) {}
       },
       items: [
         FFNavigationBarItem(
@@ -81,33 +78,12 @@ class NavigationBarState extends State<AppCore> {
     );
   }
 
-  Future getImage() async {
-    try {
-      final photo = await picker.getImage(source: ImageSource.camera);
+  Future<File> imageFile;
 
-      setState(() {
-        if (photo != null) {
-          //imgdb = photo;
-        } else {
-          print('No image selected.');
-        }
-      });
-    } catch (e) {
-      alertDialog(context, 'Não há cameras disponíveis');
-    }
-  }
-
-  getFromGallery() async {
-    PickedFile photo = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    if (photo != null) {
-      //imgdb = photo;
-    } else {
-      print('No image selected.');
-    }
+  pickImageFromGallery(ImageSource source) {
+    setState(() {
+      imageFile = ImagePicker.pickImage(source: source);
+    });
   }
 
   void rebuildAllChildren(BuildContext context) {
@@ -118,6 +94,4 @@ class NavigationBarState extends State<AppCore> {
 
     (context as Element).visitChildren(rebuild);
   }
-
-  
 }

@@ -13,10 +13,10 @@ class RegisterRepository implements IApiSheetInterfaceRegister {
   Future<User> registerUser(Register userData) async {
     try {
       Response response = await dio.post(Api.apiUrl + uri, data: {
-        'email': userData.email,
-        'password': userData.senha,
-        'name': userData.nome,
-        'typeColorBlindess': userData.tipoDalt
+        'email': userData.email.trim(),
+        'password': userData.senha.trim(),
+        'name': userData.nome.trim(),
+        'typeColorBlindess': userData.tipoDalt.trim()
       });
       var responseData = User.fromJson(response.data);
 

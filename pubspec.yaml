@@ -32,9 +32,15 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts:
   flutter_svg: ^0.19.3
-  image_picker: ^0.6.7+6
+  image_picker: ^0.6.7
   dio: ^3.0.9
   carousel_images: ^1.0.3 
+  camera:
+  path_provider:
+  path:
+  permission_handler: ^5.0.0+hotfix.3
+  flutter_icons: ^1.0.0+1
+  http: ^0.13.1
 
 dev_dependencies:
   flutter_test:

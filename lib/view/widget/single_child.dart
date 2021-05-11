@@ -26,7 +26,7 @@ SingleChildScrollView buildSingleChildScrollView(bool update) {
                 visible: UserConst.imageCarousel,
               ),
               Visibility(
-                child: Text("Usuário não logado no momento"),
+                child: Text("Nenhuma foto encontrada"),
                 visible: UserConst.disconnected,
               )
             ],
