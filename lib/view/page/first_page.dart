@@ -1,26 +1,20 @@
-import 'dart:io';
-
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ftt/aws_s3/image_picker/single_image_picker.dart';
 import 'package:flutter_ftt/repository/photo_repository.dart';
+import 'package:flutter_ftt/view/page/image_page.dart';
 import 'package:flutter_ftt/view/widget/side_bar.dart';
 import 'package:flutter_ftt/view/widget/single_child.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../main.dart';
 import '../widget/main_app_bar.dart';
 
-class NavigationBarState extends State<AppCore> {
+class FirstPageState extends State<AppCore> {
   //Variaveis utilizadas
   Source source = Source.NONE;
   int selectedIndex;
-  int mainIndex = 1;
-  var imgdb;
   String base64in;
-  var base64out;
-  final picker = ImagePicker();
   bool update;
 
   //Build do aplicativo
@@ -34,11 +28,24 @@ class NavigationBarState extends State<AppCore> {
             drawer: SideDrawer(),
             backgroundColor: Color(0xFFFCFCFC),
             appBar: buildMainAppBar(),
-            bottomNavigationBar: buildFfNavigationBar(),
+            bottomNavigationBar: buildFfNavigationBar(context),
+            floatingActionButtonLocation:FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: buildFloatingActionButton(context),
             body: buildSingleChildScrollView(update)));
   }
 
-  FFNavigationBar buildFfNavigationBar() {
+  FloatingActionButton buildFloatingActionButton(BuildContext context) {
+    return new FloatingActionButton(
+        onPressed: (){Navigator.push(context,
+                      MaterialPageRoute(builder: (context) {
+                    return ImagePage();
+                  }));}, 
+        backgroundColor: Colors.red[300],
+        child: new Icon(Icons.add),
+        );
+  }
+
+  FFNavigationBar buildFfNavigationBar(BuildContext context) {
     return FFNavigationBar(
       theme: FFNavigationBarTheme(
         barBackgroundColor: Color(0xFFff3a3a),
@@ -58,8 +65,12 @@ class NavigationBarState extends State<AppCore> {
         if (selectedIndex == 0) {
         } else if (selectedIndex == 1) {
           PhotoRepository photoRepository = new PhotoRepository();
-          photoRepository.postPhoto('TESTE.png');
-        } else if (selectedIndex == 2) {}
+          photoRepository.postPhoto('nova.jpg');
+        } else if (selectedIndex == 2) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return ImagePage();
+          }));
+        }
       },
       items: [
         FFNavigationBarItem(
@@ -67,31 +78,10 @@ class NavigationBarState extends State<AppCore> {
           label: 'Câmera',
         ),
         FFNavigationBarItem(
-          iconData: Icons.people_alt,
-          label: 'Teste',
-        ),
-        FFNavigationBarItem(
           iconData: Icons.photo_library,
           label: 'Galeria',
         ),
       ],
     );
-  }
-
-  Future<File> imageFile;
-
-  pickImageFromGallery(ImageSource source) {
-    setState(() {
-      imageFile = ImagePicker.pickImage(source: source);
-    });
-  }
-
-  void rebuildAllChildren(BuildContext context) {
-    void rebuild(Element el) {
-      el.markNeedsBuild();
-      el.visitChildren(rebuild);
-    }
-
-    (context as Element).visitChildren(rebuild);
   }
 }

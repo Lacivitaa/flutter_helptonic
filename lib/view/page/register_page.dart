@@ -24,6 +24,8 @@ class RegisterScreen extends StatelessWidget {
           Editor(_controllerNome, "Nome", Icons.person_add),
           Editor(_controllerTipo, "Tipo", Icons.adjust),
           ElevatedButton(
+            style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red)),
             child: Text("Registrar"),
             onPressed: () {
               createRegister(_controllerEmail, _controllerPassword,

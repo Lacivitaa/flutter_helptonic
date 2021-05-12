@@ -20,6 +20,8 @@ class LoginScreen extends StatelessWidget {
           Editor(_controllerEmail, "Email", Icons.email),
           Editor(_controllerPassword, "Senha", Icons.security),
           ElevatedButton(
+            style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red)),
             child: Text("Entrar"),
             onPressed: () {
               createLogin(_controllerEmail, _controllerPassword, context);
