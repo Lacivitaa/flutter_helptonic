@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ftt/aws_s3/image_picker/single_image_picker.dart';
 import 'package:flutter_ftt/view/widget/app_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 enum PhotoSource { ASSET, NETWORK }
 enum PhotoStatus { LOADING, ERROR, LOADED }
 
-class ImagePage extends StatelessWidget {
+class ImagePage extends StatefulWidget {
   PhotoSource photoSource;
   PhotoStatus photoStatus;
   String source;
@@ -52,7 +53,37 @@ class ImagePage extends StatelessWidget {
               ),
               SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () async {},
+                onPressed: () async {
+                  /* final SingleImagePicker singleImagePicker = SingleImagePicker(
+                    pickImageSource: PickImageSource.both,
+                    onImagePicked: (path) {
+                      setState(() {
+                        photoSource = PhotoSource.ASSET;
+                        source = path;
+                        photoStatus = PhotoStatus.LOADING;
+                      });
+                    },
+                    onSaveImage: (String url) async {
+                      print('On save image');
+                      return false;
+                    },
+                    onImageSuccessfullySaved: (url) {
+                      setState(() {
+                        photoStatus = PhotoStatus.LOADED;
+                        photoSource = PhotoSource.NETWORK;
+                        source = url;
+                      });
+                      print('On image successfully saved');
+                    },
+                    onImageUploadFailed: (message) {
+                      setState(() {
+                        photoStatus = PhotoStatus.ERROR;
+                      });
+                      print('On image upload failed');
+                    },
+                  );
+                  singleImagePicker.pickImage(context); */
+                },
                 child: Text("Selecione uma imagem"),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
@@ -67,5 +98,10 @@ class ImagePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    
   }
 }

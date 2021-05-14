@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class GenerateImageUrl {
@@ -14,7 +13,7 @@ class GenerateImageUrl {
     try {
       Map body = {"fileType": fileType};
 
-      var response = await http.post('http://${Platform.isIOS ? 'localhost' : '10.0.2.2'}:5000/generatePresignedUrl', body: body,);
+      var response = await http.post('https://helptonic-api.azurewebsites.net/s3', body: body);
 
       var result = jsonDecode(response.body);
 
@@ -24,12 +23,12 @@ class GenerateImageUrl {
 
         if (response.statusCode == 201) {
           isGenerated = true;
-          uploadUrl = result["uploadUrl"];
-          downloadUrl = result["downloadUrl"];
+          uploadUrl = result['uploadUrl'];
+          downloadUrl = result['downloadUrl'];
         }
       }
     } catch (e) {
       throw ('Error getting url');
     }
   }
-}
+} 

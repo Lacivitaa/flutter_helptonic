@@ -1,20 +1,18 @@
-import 'package:ff_navigation_bar/ff_navigation_bar.dart';
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ftt/aws_s3/image_picker/single_image_picker.dart';
-import 'package:flutter_ftt/repository/photo_repository.dart';
-import 'package:flutter_ftt/view/page/image_page.dart';
+import 'package:flutter_ftt/constant/user_const.dart';
 import 'package:flutter_ftt/view/widget/side_bar.dart';
 import 'package:flutter_ftt/view/widget/single_child.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../main.dart';
 import '../widget/main_app_bar.dart';
 
 class FirstPageState extends State<AppCore> {
-  //Variaveis utilizadas
-  Source source = Source.NONE;
-  int selectedIndex;
-  String base64in;
+  String source;
   bool update;
 
   //Build do aplicativo
@@ -28,60 +26,108 @@ class FirstPageState extends State<AppCore> {
             drawer: SideDrawer(),
             backgroundColor: Color(0xFFFCFCFC),
             appBar: buildMainAppBar(),
-            bottomNavigationBar: buildFfNavigationBar(context),
-            floatingActionButtonLocation:FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: buildFloatingActionButton(context),
-            body: buildSingleChildScrollView(update)));
-  }
-
-  FloatingActionButton buildFloatingActionButton(BuildContext context) {
-    return new FloatingActionButton(
-        onPressed: (){Navigator.push(context,
-                      MaterialPageRoute(builder: (context) {
-                    return ImagePage();
-                  }));}, 
-        backgroundColor: Colors.red[300],
-        child: new Icon(Icons.add),
-        );
-  }
-
-  FFNavigationBar buildFfNavigationBar(BuildContext context) {
-    return FFNavigationBar(
-      theme: FFNavigationBarTheme(
-        barBackgroundColor: Color(0xFFff3a3a),
-        selectedItemBorderColor: Color(0xFFff3a3a),
-        selectedItemBackgroundColor: Colors.white,
-        selectedItemIconColor: Color(0xFFff3a3a),
-        selectedItemLabelColor: Colors.white,
-        unselectedItemIconColor: Colors.white,
-        unselectedItemLabelColor: Colors.white,
-      ),
-      selectedIndex: selectedIndex,
-      onSelectTab: (index) {
-        setState(() {
-          selectedIndex = index;
-        });
-
-        if (selectedIndex == 0) {
-        } else if (selectedIndex == 1) {
-          PhotoRepository photoRepository = new PhotoRepository();
-          photoRepository.postPhoto('nova.jpg');
-        } else if (selectedIndex == 2) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return ImagePage();
-          }));
-        }
-      },
-      items: [
-        FFNavigationBarItem(
-          iconData: Icons.camera_alt,
-          label: 'Câmera',
-        ),
-        FFNavigationBarItem(
-          iconData: Icons.photo_library,
-          label: 'Galeria',
-        ),
-      ],
-    );
+            body: Container(
+              child: Column(
+                children: [
+                  buildSingleChildScrollView(update),
+                  SizedBox(height: 14),
+                  Visibility(child: Text("Novas fotos podem ser adicionadas",
+                  style: GoogleFonts.coda(fontSize: 18, color: Colors.black), textAlign: TextAlign.left,),
+                  visible: UserConst.imageCarousel,),
+                  SizedBox(height: 8),
+                  Visibility(
+                    visible: UserConst.imageCarousel,
+                    child: Container(
+                        child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red,
+                        ),
+                      onPressed: () async {
+                        final SingleImagePicker singleImagePicker =
+                            SingleImagePicker(
+                          pickImageSource: PickImageSource.both,
+                          onImagePicked: (path) {
+                          },
+                          onSaveImage: (String url) async {
+                          },
+                          onImageSuccessfullySaved: (url) {
+                          },
+                          onImageUploadFailed: (message) {
+                          },
+                        );
+                        singleImagePicker.pickImage(context);
+                      },
+                      child: Text('Adicionar imagem'),
+                    )),
+                  )
+                ],
+              ),
+            )));
   }
 }
+/*
+floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+            floatingActionButton: FloatingActionButton(
+                backgroundColor: Color(0xFFff3a3a),
+                child: new Icon(Icons.add),
+                onPressed: () async {
+                  final SingleImagePicker singleImagePicker = SingleImagePicker(
+                    pickImageSource: PickImageSource.both,
+                    onImagePicked: (path) {
+                      /* setState(() {
+                        photoSource = PhotoSource.ASSET;*/
+                        source = path;
+                        /*photoStatus = PhotoStatus.LOADING;
+                      }); */
+                      log("Etapa 1");
+                    },
+                    onSaveImage: (String url) async {
+                      log('On save image');
+                      return false;
+                    },
+                    onImageSuccessfullySaved: (url) {
+                      /* setState(() {
+                        photoStatus = PhotoStatus.LOADED;
+                        photoSource = PhotoSource.NETWORK; */
+                        source = url;
+                     /*  }); */
+                      log('On image successfully saved');
+                    },
+                    onImageUploadFailed: (message) {
+                      /* setState(() {
+                        photoStatus = PhotoStatus.ERROR;
+                      }); */
+                      log('On image upload failed');
+                    },
+                  );
+                  singleImagePicker.pickImage(context);
+                },),
+
+
+/* class MyFloatingActionButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return 
+        /* showBottomSheet(
+            context: context,
+          builder: (context) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  leading: new Icon(Icons.camera),
+                  title: new Text('Camera'),
+                  onTap: (){},
+                ),
+                ListTile(
+                  leading: new Icon(Icons.photo_library),
+                  title: new Text('Galeria'),
+                  onTap: () {},
+                ),
+              ],
+            );
+          }); */
+      },
+    );
+  } */
+} */

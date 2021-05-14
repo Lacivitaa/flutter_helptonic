@@ -15,7 +15,7 @@ class PhotoRepository implements IApiSheetInterfacePhoto {
       Response response = await dio.post(Api.apiUrl + uri,
           data: {
             'userId': UserConst.id,
-            'photo': {'imageUrl': Api.s3Url + urlImage}
+            'photo': {'imageUrl': urlImage}
           },
           options: Options(headers: {
             'x-access-token': UserConst.token,

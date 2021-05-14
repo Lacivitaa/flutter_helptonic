@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ftt/aws_s3/aws/generate_image_url.dart';
 import 'package:flutter_ftt/aws_s3/aws/upload_files.dart';
+import 'package:flutter_ftt/repository/photo_repository.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 
@@ -92,6 +93,13 @@ class SingleImagePicker {
           throw generateImageUrl.message;
         }
 
+        PhotoRepository repository = PhotoRepository();
+        bool isUploaded =
+            await repository.postPhoto(generateImageUrl.downloadUrl);
+        if (!isUploaded) {
+          throw "Failed to upload image";
+        }
+        
         UploadFile uploadFile = UploadFile();
         await uploadFile.call(uploadUrl, image);
 
