@@ -30,7 +30,6 @@ class RegisterScreen extends StatelessWidget {
             onPressed: () {
               createRegister(_controllerEmail, _controllerPassword,
                   _controllerNome, _controllerTipo, context);
-              Navigator.pop(context);
             },
           )
         ],
@@ -63,6 +62,7 @@ class RegisterScreen extends StatelessWidget {
                 alertDialog(context, 'Informações erradas/faltando'));
         _controllerEmail.clear();
         _controllerPassword.clear();
+        Navigator.pop(context, registerUser);
       }
     } else if (email == null) {
       _controllerEmail.clear();

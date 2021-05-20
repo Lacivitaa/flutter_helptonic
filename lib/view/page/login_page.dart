@@ -25,6 +25,7 @@ class LoginScreen extends StatelessWidget {
             child: Text("Entrar"),
             onPressed: () {
               createLogin(_controllerEmail, _controllerPassword, context);
+              Navigator.pop(context);
             },
           ),
         ],
