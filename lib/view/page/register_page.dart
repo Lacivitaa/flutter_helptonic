@@ -19,10 +19,10 @@ class RegisterScreen extends StatelessWidget {
       appBar: buildAppBar("Registrar"),
       body: Column(
         children: [
-          Editor(_controllerEmail, "Email", Icons.email),
-          Editor(_controllerPassword, "Senha", Icons.security),
-          Editor(_controllerNome, "Nome", Icons.person_add),
-          Editor(_controllerTipo, "Tipo", Icons.adjust),
+          Editor(_controllerEmail, "Email", Icons.email, false),
+          Editor(_controllerPassword, "Senha", Icons.security, true),
+          Editor(_controllerNome, "Nome", Icons.person_add, false),
+          Editor(_controllerTipo, "Tipo", Icons.adjust, false),
           ElevatedButton(
             style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(Colors.red)),
@@ -78,8 +78,9 @@ class Editor extends StatelessWidget {
   final TextEditingController _controller;
   final String _rotulo;
   final IconData _icon;
+  final bool _senha;
 
-  Editor(this._controller, this._rotulo, this._icon);
+  Editor(this._controller, this._rotulo, this._icon, this._senha);
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +91,7 @@ class Editor extends StatelessWidget {
         style: GoogleFonts.coda(color: Colors.black, fontSize: 15),
         decoration: InputDecoration(labelText: _rotulo, icon: Icon(_icon)),
         keyboardType: TextInputType.text,
+        obscureText: _senha,
       ),
     );
   }

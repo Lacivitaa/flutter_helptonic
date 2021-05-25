@@ -35,7 +35,7 @@ dependencies:
   image_picker: ^0.6.7
   dio: ^3.0.9
   carousel_images: ^1.0.3
-  permission_handler: ^
+  permission_handler:
   flutter_icons: ^1.0.0+1
   http: ^0.12.1
 

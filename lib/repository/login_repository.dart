@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_ftt/interface/login_repository_interface.dart';
 import 'package:flutter_ftt/model/login.dart';
 import 'package:flutter_ftt/model/user.dart';
@@ -16,6 +17,7 @@ class LoginRepository implements IApiSheetInterfaceLogin {
   @override
   Future<User> loginUser(Login userData) async {
     try {
+
       Response response = await dio.post(Api.apiUrl + uri,
           data: {'email': userData.email, 'password': userData.senha});
       var responseData = User.fromJson(response.data);
@@ -29,7 +31,6 @@ class LoginRepository implements IApiSheetInterfaceLogin {
         for (int i = 0; i < responseData.photo.length; i++) {
           imageList.add(responseData.photo[i].imageUrl);
         }
-        
       }
 
       return responseData;

@@ -14,6 +14,7 @@ import '../widget/main_app_bar.dart';
 class FirstPageState extends State<AppCore> {
   String source;
   bool update;
+  bool isLogged = UserConst.id!=null;
 
   //Build do aplicativo
   @override
@@ -33,7 +34,7 @@ class FirstPageState extends State<AppCore> {
                   SizedBox(height: 14),
                   Visibility(child: Text("Novas fotos podem ser adicionadas",
                   style: GoogleFonts.coda(fontSize: 18, color: Colors.black), textAlign: TextAlign.left,),
-                  visible: UserConst.imageCarousel,),
+                  visible: UserConst.imageCarousel),
                   SizedBox(height: 8),
                   Visibility(
                     visible: UserConst.imageCarousel,

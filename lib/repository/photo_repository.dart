@@ -31,7 +31,6 @@ class PhotoRepository implements IApiSheetInterfacePhoto {
 
   @override
   Future<bool> deletePhoto(Photo userData) {
-
     throw UnimplementedError();
   }
 }

@@ -8,12 +8,16 @@ import 'package:flutter_ftt/view/widget/app_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     final TextEditingController _controllerEmail = TextEditingController();
     final TextEditingController _controllerPassword = TextEditingController();
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: buildAppBar("Login"),
       body: Column(
         children: [

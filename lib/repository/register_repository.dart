@@ -12,6 +12,12 @@ class RegisterRepository implements IApiSheetInterfaceRegister {
   @override
   Future<User> registerUser(Register userData) async {
     try {
+      bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+.[a-zA-Z]+").hasMatch(userData.email);
+
+      if(!emailValid){
+        throw "Email em formato invalido";
+      }
+
       Response response = await dio.post(Api.apiUrl + uri, data: {
         'email': userData.email.trim(),
         'password': userData.senha.trim(),

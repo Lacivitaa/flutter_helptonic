@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ftt/aws_s3/aws/generate_image_url.dart';
 import 'package:flutter_ftt/aws_s3/aws/upload_files.dart';
-import 'package:flutter_ftt/repository/photo_repository.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 
@@ -77,12 +75,12 @@ class SingleImagePicker {
 
       PickedFile image = await imagePicker.getImage(source: imageSource);
 
-      if (image != null) {
-        onImagePicked?.call(image.path);
+     /*  if (image != null) {
+        onImagePicked?.call(image.path);} */
 
-        String fileExtension = path.extension(image.path);
+        /* String fileExtension = path.extension(image.path); */
 
-        GenerateImageUrl generateImageUrl = GenerateImageUrl();
+        /* GenerateImageUrl generateImageUrl = GenerateImageUrl();
         await generateImageUrl.call(fileExtension);
 
         String uploadUrl;
@@ -91,31 +89,26 @@ class SingleImagePicker {
           uploadUrl = generateImageUrl.uploadUrl;
         } else {
           throw generateImageUrl.message;
-        }
+        } */
 
-        PhotoRepository repository = PhotoRepository();
+        /* PhotoRepository repository = PhotoRepository();
         bool isUploaded =
             await repository.postPhoto(generateImageUrl.downloadUrl);
         if (!isUploaded) {
           throw "Failed to upload image";
-        }
-        
-        UploadFile uploadFile = UploadFile();
-        await uploadFile.call(uploadUrl, image);
+        } */
 
-        if (uploadFile.isUploaded != null && uploadFile.isUploaded) {
-          bool isSaved = await onSaveImage(generateImageUrl.downloadUrl);
+        UploadFile uploadFile = UploadFile();
+        bool isSaved = await uploadFile.call(image);
+
           if (isSaved) {
-            onImageSuccessfullySaved(generateImageUrl.downloadUrl);
+            onImageSuccessfullySaved(uploadFile.downloadUrl);
           } else {
             throw "Failed to save image";
-          }
-        } else {
-          throw uploadFile.message;
-        }
-      }
+          }     
     } catch (e) {
-      onImageUploadFailed(e.toString());
+      throw ("Erro no request");
     }
   }
 }
+  
