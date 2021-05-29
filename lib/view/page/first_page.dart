@@ -1,12 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ftt/aws_s3/image_picker/single_image_picker.dart';
-import 'package:flutter_ftt/constant/user_const.dart';
 import 'package:flutter_ftt/view/widget/side_bar.dart';
 import 'package:flutter_ftt/view/widget/single_child.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../constant/user_const.dart'; 
 
 import '../../main.dart';
 import '../widget/main_app_bar.dart';
@@ -14,11 +13,11 @@ import '../widget/main_app_bar.dart';
 class FirstPageState extends State<AppCore> {
   String source;
   bool update;
-  bool isLogged = UserConst.id!=null;
 
   //Build do aplicativo
   @override
   Widget build(BuildContext context) {
+
     setState(() {});
 
     return MaterialApp(

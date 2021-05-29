@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'alert_dialog.dart';
+import 'alertDialog.dart';
 
 Future<void> showMyDialog(BuildContext context, String message) async {
   showDialog(

@@ -1,5 +1,3 @@
-import 'package:flutter_ftt/model/photo.dart';
-
 class UserConst{
   static String token = '';
   static String id = '';
@@ -8,5 +6,5 @@ class UserConst{
   static String typeBlindess = '';
   static bool disconnected = true;
   static bool imageCarousel = false;
-  static List<Photo> imagesUrl;
+  static List<String> imageList = [];
 }

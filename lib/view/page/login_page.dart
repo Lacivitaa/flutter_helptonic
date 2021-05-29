@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ftt/constant/user_const.dart';
 import 'package:flutter_ftt/model/login.dart';
 import 'package:flutter_ftt/repository/login_repository.dart';
-import 'package:flutter_ftt/view/service/show_dialog.dart';
+import 'package:flutter_ftt/view/service/showDialog.dart';
 import 'package:flutter_ftt/view/widget/app_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -28,8 +27,7 @@ class LoginScreen extends StatelessWidget {
                   backgroundColor: MaterialStateProperty.all<Color>(Colors.red)),
             child: Text("Entrar"),
             onPressed: () {
-              createLogin(_controllerEmail, _controllerPassword, context);
-              Navigator.pop(context);
+               createLogin(_controllerEmail, _controllerPassword, context);
             },
           ),
         ],
@@ -37,7 +35,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void createLogin(TextEditingController _controllerEmail, TextEditingController _controllerPassword, BuildContext context) async {
+  Future<void> createLogin(TextEditingController _controllerEmail, TextEditingController _controllerPassword, BuildContext context) async {
     final String email = _controllerEmail.text.trim();
     final String password = _controllerPassword.text.trim();
 
@@ -45,14 +43,14 @@ class LoginScreen extends StatelessWidget {
       final loginUser = Login(email: email, senha: password);
       LoginRepository userRepository = new LoginRepository();
       var user = await userRepository.loginUser(loginUser);
-      UserConst.disconnected = false;
-      UserConst.imageCarousel = true;
+      
       if (user.message != null) {
         showMyDialog(context, "Login incorreto");
         _controllerEmail.clear();
         _controllerPassword.clear();
       }
-      Navigator.pop(context, loginUser);
+      else
+        Navigator.pop(context, loginUser);
     } else if (email == null) {
       _controllerEmail.clear();
       _controllerPassword.clear();

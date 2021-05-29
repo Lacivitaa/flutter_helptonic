@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ftt/constant/user_const.dart';
 import 'package:flutter_ftt/model/register.dart';
 import 'package:flutter_ftt/repository/register_repository.dart';
-import 'package:flutter_ftt/view/service/alert_dialog.dart';
+import 'package:flutter_ftt/view/service/alertDialog.dart';
 import 'package:flutter_ftt/view/widget/app_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 

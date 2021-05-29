@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ftt/aws_s3/aws/upload_files.dart';
+import 'package:flutter_ftt/constant/user_const.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 
@@ -99,9 +100,10 @@ class SingleImagePicker {
         } */
 
         UploadFile uploadFile = UploadFile();
-        bool isSaved = await uploadFile.call(image);
+        String urlImage = await uploadFile.call(image);
 
-          if (isSaved) {
+          if (urlImage.isNotEmpty) {
+            UserConst.imageList.add(urlImage);
             onImageSuccessfullySaved(uploadFile.downloadUrl);
           } else {
             throw "Failed to save image";

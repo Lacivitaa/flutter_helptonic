@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ftt/constant/user_const.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-List<String> imageList = [];
+
 
 SingleChildScrollView buildSingleChildScrollView(bool update) {
   return SingleChildScrollView(
@@ -41,7 +41,7 @@ CarouselImages createCarousel() {
 
   return new CarouselImages(
       scaleFactor: 0.8,
-      listImages: imageList,
+      listImages: UserConst.imageList,
       height: 300.0,
       borderRadius: 10.0,
       cachedNetworkImage: true,

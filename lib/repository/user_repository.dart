@@ -1,23 +1,17 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_ftt/constant/api_const.dart';
 import 'package:flutter_ftt/interface/login_repository_interface.dart';
 import 'package:flutter_ftt/model/login.dart';
 import 'package:flutter_ftt/model/user.dart';
-import 'package:flutter_ftt/constant/api_const.dart';
 import 'package:flutter_ftt/constant/user_const.dart';
-import 'package:flutter_ftt/view/widget/single_child.dart';
 
-BuildContext context;
-
-class LoginRepository implements IApiSheetInterfaceLogin {
+class UserRepository implements IApiSheetInterfaceLogin {
   Dio dio = Dio();
   static String uri = "/login";
 
   @override
   Future<User> loginUser(Login userData) async {
     try {
-
       Response response = await dio.post(Api.apiUrl + uri,
           data: {'email': userData.email, 'password': userData.senha});
       var responseData = User.fromJson(response.data);
@@ -28,11 +22,6 @@ class LoginRepository implements IApiSheetInterfaceLogin {
         UserConst.name = responseData.name;
         UserConst.typeBlindess = responseData.typeColorBlindess;
         UserConst.token = responseData.token;
-        UserConst.disconnected = false;
-        UserConst.imageCarousel = true;
-        for (int i = 0; i < responseData.photo.length; i++) {
-          UserConst.imageList.add(responseData.photo[i].imageUrl);
-        }
       }
 
       return responseData;
